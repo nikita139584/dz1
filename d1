@@ -1,0 +1,126 @@
+#include <iostream>
+#include <windows.h>
+#include <algorithm>
+#include <ctime>
+using namespace std;
+
+void grade_dz(int size) {
+	int* grade_dz = new int[size];
+	for (int i = 0; i < size; i++) {
+		grade_dz[i] = i * 10;
+		cout <<  i;
+	}
+	delete[] grade_dz;
+}
+void grade_praktika(int size) {
+	int* grade_praktika = new int[size];
+	for (int i = 0; i < size; i++) {
+		grade_praktika[i] = i * 10;
+		cout << i;
+	}
+	delete[] grade_praktika;
+}
+void grade_ispyt(int size) {
+	int* grade_ispyt = new int[size];
+	for (int i = 0; i < size; i++) {
+		grade_ispyt[i] = i * 10;
+		cout << i;
+	}
+	delete[] grade_ispyt;
+}
+class Student {
+	static int student_count;
+private:
+	string name;
+	string surname;
+	unsigned int date_of_birth;
+	string address;
+	unsigned int phone_number;
+
+	// на практиці у 99% випадків, статичні поля так само як і екземплярні - будуть закриті (в приватній секції та будуть частиною реалізації)
+	// Заповнення масиву
+	 // приклад статичного поля загального користування (всі об'єкти класу скільки б їх не було), будуть "бачити" одне загальне значення
+	// в даному випадку, для поля каунт НЕ БУДЕ СЕТТЕРА (логіка інша)
+public:
+	Student():Student("Oleg", "Olegovich", 28092010, "Sadovaja 3", 3806325523) {}
+	Student(string name, string surname, unsigned int date_of_birth, string address, unsigned int phone_number) {
+		this->name = name;
+		this->surname = surname;
+		this->date_of_birth = date_of_birth;
+		this->address = address;
+		this->phone_number = phone_number;
+		student_count++;
+	}
+
+	// геттер для статичного поля (поля КЛАСУ, а не ОБ'ЄКТУ)
+
+	string Getname() {
+		return name;
+
+	}
+	void Setname(string new_name) {
+		this->name = new_name;
+	}
+
+	string Getsurname() {
+		return surname;
+
+	}
+	void Setsurname(string new_surname) {
+		this->surname = new_surname;
+
+	}
+
+	unsigned int GetDateOfBirth() {
+		return date_of_birth;
+
+	}
+	void SetDateOfBirth(unsigned int new_date_of_birth) {
+		this->date_of_birth = new_date_of_birth;
+		
+	}
+
+	string GetAddress() {
+		return address;
+
+	}
+	void SetAddress(string new_address) {
+		this->address = address;
+
+	}
+
+	unsigned int GetPhone_number() {
+		return phone_number;
+
+	}
+	void SetPhone_number(unsigned int new_phone_number) {
+		this->phone_number = phone_number;
+	}
+
+	static int GetStudent_count() {
+		return student_count;
+	}
+
+};
+int main() {
+	SetConsoleOutputCP(1251);
+	srand(time(0));
+	grade_dz(2);
+	grade_ispyt(2);
+	grade_praktika(2);
+	Student s;
+	s.Setname("Ivan");
+	s.SetAddress("Sadovaja 3");
+	s.SetDateOfBirth(28092010);
+	s.SetPhone_number(3806325523);
+	s.Setsurname("Olegovich");
+	
+	cout << "Name: " << s.Getname() << "\n";
+	cout << "Address: " << s.GetAddress() << "\n";
+	cout << "Date of birth: " << s.GetDateOfBirth() << "\n";
+	cout << "Phone number: " << s.GetPhone_number() << "\n";
+	cout << "Surname: " << s.Getsurname() << "\n";
+	cout << "Numb of Student: " << s.GetStudent_count() << "\n";
+
+
+}
